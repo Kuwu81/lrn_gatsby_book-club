@@ -30,6 +30,7 @@ module.exports = {
             }
         },
         `gatsby-plugin-react-helmet`,
+        `gatsby-plugin-styled-components`,
         `gatsby-plugin-image`,
         {
             resolve: `gatsby-source-filesystem`,

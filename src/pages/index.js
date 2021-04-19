@@ -1,5 +1,6 @@
 import * as React from "react"
 import { Link, graphql } from "gatsby";
+import BookItem from "../compnents/BookItem";
 
 // styles
 const pageStyles = {
@@ -59,11 +60,11 @@ const IndexPage = (props) => {
     <main style={pageStyles}>
       <title>Home Page</title>
       {props.data.allBook.edges.map((edge) =>
-          <div key={edge.node.id}>
+          <BookItem key={edge.node.id}>
             <h2>{edge.node.title} - <small>{edge.node.author.name}</small></h2>
             <div>{edge.node.summary}</div>
             <Link to={`/book/${edge.node.id}`}>Join conversation</Link>
-          </div>
+          </BookItem>
       )}
     </main>
   )
@@ -85,4 +86,4 @@ export const query = graphql`
     }
   }
 `
-export default IndexPage
+export default IndexPage;

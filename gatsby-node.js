@@ -11,12 +11,18 @@ exports.createPages = ({ graphql, actions }) => {
                 node {
                   summary
                   title
-                  localImage {
-                    publicURL
-                  }
                   id
                   author {
                     name
+                  }
+                  localImage {
+                    childImageSharp {
+                        gatsbyImageData(
+                            layout: FIXED
+                            width: 200
+                            placeholder: DOMINANT_COLOR
+                        )
+                    }
                   }
                 }
               }

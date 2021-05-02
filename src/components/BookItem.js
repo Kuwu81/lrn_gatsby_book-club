@@ -1,5 +1,6 @@
 import React from "react";
 import styled from 'styled-components';
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 
 const BookItemWrapper = styled.section`
   border: 1px solid #ccc;
@@ -39,10 +40,11 @@ const BookItemContentWrapper = styled.div`
 `
 
 const BookItem = ({ authorName, bookTitle, bookSummary, bookCover, children }) => {
+    const image = getImage(bookCover)
     return (
         <BookItemWrapper>
             <BookItemImageWrapper>
-                <img src={bookCover} alt="Book cover"/>
+                <GatsbyImage image={image} alt="Book cover"/>
             </BookItemImageWrapper>
             <BookItemContentWrapper>
                 <h2>

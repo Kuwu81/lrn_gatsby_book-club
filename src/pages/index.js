@@ -31,7 +31,7 @@ const IndexPage = (props) => {
             {props.data.allBook.edges.map((edge) =>
                 <BookItem
                     authorName={edge.node.author.name}
-                    bookCover={edge.node.localImage.publicURL}
+                    bookCover={edge.node.localImage}
                     bookSummary={edge.node.summary}
                     bookTitle={edge.node.title}
                     key={edge.node.id}
@@ -52,12 +52,18 @@ export const query = graphql`
         node {
           summary
           title
-          localImage {
-            publicURL
-          }
           id
           author {
             name
+          }
+          localImage {
+            childImageSharp {
+                gatsbyImageData(
+                    layout: FIXED
+                    width: 200
+                    placeholder: DOMINANT_COLOR
+                )
+            }
           }
         }
       }

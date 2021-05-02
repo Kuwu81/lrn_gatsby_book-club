@@ -1,54 +1,45 @@
 import * as React from "react"
+import styled from "styled-components";
 import { Link, graphql } from "gatsby";
-import BookItem from "../compnents/BookItem";
-import Layout from "../compnents/Layout";
+import BookItem from "../components/BookItem";
+import Layout from "../components/Layout";
 import '../styles/index.css';
 
-// styles
-const pageStyles = {
-  color: "#232129",
-  padding: 96,
-  fontFamily: "-apple-system, Roboto, sans-serif, serif",
-}
+const LinkButton = styled.div`
+  text-align: right;
+  margin-bottom: 8px;
 
-const linkStyle = {
-  color: "#8954A8",
-  fontWeight: "bold",
-  fontSize: 16,
-  verticalAlign: "5%",
-}
-
-const docLinkStyle = {
-  ...linkStyle,
-  listStyleType: "none",
-  marginBottom: 24,
-  float: "right"
-}
-
-const descriptionStyle = {
-  color: "#232129",
-  fontSize: 14,
-  marginTop: 10,
-  marginBottom: 0,
-  lineHeight: 1.25,
-  textAlign: "justify"
-}
-
+  a {
+    padding: 8px;
+    background-color: rebeccapurple;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    
+    &:hover {
+      background: indigo;
+    }
+  }
+  
+`;
 
 const IndexPage = (props) => {
   console.log(props);
   return (
       <Layout>
-          <main style={pageStyles}>
             <title>Home Page</title>
             {props.data.allBook.edges.map((edge) =>
-                <BookItem key={edge.node.id}>
-                  <h2>{edge.node.title} - <small>{edge.node.author.name}</small></h2>
-                  <div style={descriptionStyle}>{edge.node.summary}</div>
-                  <Link style={docLinkStyle} to={`/book/${edge.node.id}`}>Join conversation</Link>
+                <BookItem
+                    authorName={edge.node.author.name}
+                    bookSummary={edge.node.summary}
+                    bookTitle={edge.node.title}
+                    key={edge.node.id}
+                >
+                <LinkButton>
+                     <Link to={`/book/${edge.node.id}`}>Join conversation</Link>
+                </LinkButton>
                 </BookItem>
             )}
-          </main>
       </Layout>
   )
 }

@@ -7,6 +7,7 @@ const BookTemplate = ({ pageContext }) => {
         <Layout>
             <BookItem
                 authorName={pageContext.author.name}
+                bookCover={pageContext.localImage.publicURL}
                 bookTitle={pageContext.title}
                 bookSummary={pageContext.summary}
             />

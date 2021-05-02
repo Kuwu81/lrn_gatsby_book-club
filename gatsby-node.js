@@ -11,6 +11,9 @@ exports.createPages = ({ graphql, actions }) => {
                 node {
                   summary
                   title
+                  localImage {
+                    publicURL
+                  }
                   id
                   author {
                     name

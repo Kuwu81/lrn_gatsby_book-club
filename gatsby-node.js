@@ -9,21 +9,8 @@ exports.createPages = ({ graphql, actions }) => {
             allBook {
               edges {
                 node {
-                  summary
-                  title
                   id
-                  author {
-                    name
-                  }
-                  localImage {
-                    childImageSharp {
-                        gatsbyImageData(
-                            layout: FIXED
-                            width: 200
-                            placeholder: DOMINANT_COLOR
-                        )
-                    }
-                  }
+                 
                 }
               }
            }
@@ -37,7 +24,7 @@ exports.createPages = ({ graphql, actions }) => {
             createPage({
                 path: `/book/${book.node.id}`,
                 component: bookTemplate,
-                context: book.node,
+                context: { bookId: book.node.id },
             })
         })
     });

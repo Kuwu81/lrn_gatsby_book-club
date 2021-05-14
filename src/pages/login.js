@@ -1,5 +1,8 @@
 import React, { useState, useContext } from "react";
 import { FirebaseContext } from '../components/Firebase';
+import {Form} from "../components/common/Form";
+import {Input} from "../components/common/Input";
+import {Button} from "../components/common/Button";
 
 const LoginPage = () => {
     const { firebase } = useContext(FirebaseContext);
@@ -19,11 +22,11 @@ const LoginPage = () => {
     }
     return (
         <section>
-            <form onSubmit={handleSubmit}>
-                <input name="email" value={formValues.email} placeholder="email" type="email" onChange={handleInputChange} />
-                <input name="password" value={formValues.password } placeholder="password" type="password" onChange={handleInputChange} />
-                <button type="submit">Login</button>
-            </form>
+            <Form onSubmit={handleSubmit}>
+                <Input name="email" value={formValues.email} placeholder="email" type="email" onChange={handleInputChange} />
+                <Input name="password" value={formValues.password } placeholder="password" type="password" onChange={handleInputChange} />
+                <Button type="submit" block={true}>Login</Button>
+            </Form>
         </section>);
 }
 

@@ -1,20 +1,19 @@
 import React from "react";
 import { graphql } from "gatsby";
-import Layout from "../components/Layout";
 import BookItem from "../components/BookItem";
 
 const BookTemplate = ({ data }) => {
     console.log(data)
     const { book } = data;
     return (
-        <Layout>
+        <section>
             <BookItem
                 authorName={book.author.name}
                 bookCover={book.localImage}
                 bookTitle={book.title}
                 bookSummary={book.summary}
             />
-        </Layout>
+        </section>
     );
 }
 

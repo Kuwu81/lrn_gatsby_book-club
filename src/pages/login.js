@@ -1,9 +1,8 @@
-import React, {useState} from "react";
-import { useAuth } from '../components/Firebase';
-import Layout from "../components/Layout";
+import React, { useState, useContext } from "react";
+import { FirebaseContext } from '../components/Firebase';
 
 const LoginPage = () => {
-    const { firebase } = useAuth();
+    const { firebase } = useContext(FirebaseContext);
     const [formValues, setFormValues] = useState({ email: '', password: ''});
 
     function handleSubmit(e) {
@@ -18,13 +17,14 @@ const LoginPage = () => {
              [e.target.name]: e.target.value
         }));
     }
-    return (<Layout>
-        <form onSubmit={handleSubmit}>
-            <input name="email" value={formValues.email} placeholder="email" type="email" onChange={handleInputChange} />
-            <input name="password" value={formValues.password } placeholder="password" type="password" onChange={handleInputChange} />
-            <button type="submit">Login</button>
-        </form>
-    </Layout>);
+    return (
+        <section>
+            <form onSubmit={handleSubmit}>
+                <input name="email" value={formValues.email} placeholder="email" type="email" onChange={handleInputChange} />
+                <input name="password" value={formValues.password } placeholder="password" type="password" onChange={handleInputChange} />
+                <button type="submit">Login</button>
+            </form>
+        </section>);
 }
 
 export default LoginPage;

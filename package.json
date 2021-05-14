@@ -15,7 +15,9 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "babel-plugin-styled-components": "^1.12.0",
+    "firebase": "^8.6.1",
     "gatsby": "^3.1.1",
     "gatsby-firesource": "^2.0.3",
     "gatsby-plugin-gatsby-cloud": "^2.0.0",

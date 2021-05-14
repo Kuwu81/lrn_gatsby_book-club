@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Header from "./Header";
+import { FirebaseContext, useAuth } from './Firebase';
 
 const MainWrapper = styled.main`
   color: #232129;
@@ -9,11 +10,12 @@ const MainWrapper = styled.main`
 `;
 
 const Layout = ({ children}) => {
+    const { user, firebase, loading } = useAuth();
     return (
-        <div>
+        <FirebaseContext.Provider value={{ user, firebase, loading }}>
             <Header />
             <MainWrapper>{children}</MainWrapper>
-        </div>
+        </FirebaseContext.Provider>
     );
 }
 

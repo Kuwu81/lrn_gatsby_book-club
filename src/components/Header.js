@@ -1,5 +1,6 @@
 import React from "react";
 import {graphql, useStaticQuery} from "gatsby";
+import { FirebaseContext } from './Firebase';
 
 const headerStyle = {
     top: '0',
@@ -27,6 +28,12 @@ const Header = () => {
     return (<div style={headerStyle}>
         <div className="container">
             <h1>{data.site.siteMetadata.title}</h1>
+            <FirebaseContext.Consumer>
+                {props => {
+                    console.log(props);
+                    return <div />
+                }}
+            </FirebaseContext.Consumer>
         </div>
     </div>);
 }

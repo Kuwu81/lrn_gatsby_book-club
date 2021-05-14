@@ -5,7 +5,7 @@ import { FirebaseContext, useAuth } from './Firebase';
 
 const MainWrapper = styled.main`
   color: #232129;
-  padding: 96px;
+  padding: 7rem;
   font-family: -apple-system, Roboto, sans-serif, serif;
 `;
 

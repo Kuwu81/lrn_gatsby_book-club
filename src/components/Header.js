@@ -1,20 +1,63 @@
-import React from "react";
-import {graphql, useStaticQuery} from "gatsby";
+import React, { useContext } from "react";
+import {graphql, useStaticQuery, navigate, Link} from "gatsby";
 import { FirebaseContext } from './Firebase';
+import styled from "styled-components";
 
-const headerStyle = {
-    top: '0',
-    height: '40px',
-    width: '100%',
-    marginBottom: '20px',
-    padding: '20px',
-    paddingLeft: 96,
-    backgroundColor: 'lavender',
-    display: 'flex',
-    alignItems: 'center',
-}
+const HeaderWrapper = styled.header`
+  top: 0;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 1.45rem;
+  padding: 1.45rem 7rem;
+  color: white;
+  background-color: rebeccapurple;
+  
+  >h1 {
+    flex-grow: 1;
+    
+    a{
+      text-decoration: none;
+      color: white;
+    }
+  }
+  
+  >div {
+    margin: auto 0;
+  }
+`;
+
+const UserInfo = styled.div`
+  text-align: right;
+`;
+
+const LogoutLink = styled.span`
+  margin: auto 0;
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+  
+  &:hover{
+  text-decoration: underline
+  }
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: white;
+
+  &:hover{
+    text-decoration: underline
+  }
+`
+
 
 const Header = () => {
+    const { user, firebase } = useContext(FirebaseContext);
+    function handleLogoutClick() {
+        firebase.logout().then(() => navigate('/login'))
+    }
     const data = useStaticQuery(graphql`
         {
           site {
@@ -25,17 +68,33 @@ const Header = () => {
         }
     `);
 
-    return (<div style={headerStyle}>
-        <div className="container">
-            <h1>{data.site.siteMetadata.title}</h1>
-            <FirebaseContext.Consumer>
-                {props => {
-                    console.log(props);
-                    return <div />
-                }}
-            </FirebaseContext.Consumer>
-        </div>
-    </div>);
+    return (
+        <HeaderWrapper>
+            <h1>
+                <Link to='/'>{data.site.siteMetadata.title}</Link>
+            </h1>
+            <div>
+                { !!user && !!user.email &&
+                    <UserInfo>
+                        Hi dear  {user.email}
+                        <div>
+                            <LogoutLink onClick={handleLogoutClick}>
+                                Logout
+                            </LogoutLink>
+                        </div>
+                    </UserInfo>
+                }
+                {
+                    (!user || !user.email) &&
+                    <div>
+                        <StyledLink to='/login'>
+                            Login
+                        </StyledLink>
+                    </div>
+                }
+            </div>
+        </HeaderWrapper>
+    );
 }
 
 export default Header;

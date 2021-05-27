@@ -22,8 +22,11 @@ class Firebase {
             .where('userId', '==', userId).get();
     }
 
-    async register({ email, password }) {
-        return this.auth.createUserWithEmailAndPassword(email, password);
+    async register({ username, email, password }) {
+        const newUser = await this.auth.createUserWithEmailAndPassword(email, password);
+        return this.db.collection('profiles').doc(username).set({
+            userId: newUser.user.uid //specific to firestore
+        })
     }
 
     async login({ email, password }) {

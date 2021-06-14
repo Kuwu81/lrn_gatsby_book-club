@@ -19,7 +19,7 @@ class Firebase {
 
     async getUserProfile({userId}) {
         return this.db.collection('profiles')
-            .where('userId', '==', userId).get();
+            .where('userId', '==', userId).get(); // get() means running only once as in REST
     }
 
     async register({ username, email, password }) {
@@ -35,6 +35,16 @@ class Firebase {
 
     async logout() {
         await this.auth.signOut();
+    }
+
+    subscribeToBookComments({bookId}) {
+        const bookRef = this.db.collection('books')
+            .doc(bookId);
+        return this.db.collection('comments')
+            .where('book', '==', bookRef)
+            .onSnapshot((s) => {
+                console.log(s)
+            })
     }
 }
 

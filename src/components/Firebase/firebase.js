@@ -37,14 +37,14 @@ class Firebase {
         await this.auth.signOut();
     }
 
-    subscribeToBookComments({bookId}) {
+    // onSnapshot means: run every time data changes (firebase real-time data)
+    // that's why async is not needed
+    subscribeToBookComments({bookId, onSnapshot}) {
         const bookRef = this.db.collection('books')
             .doc(bookId);
         return this.db.collection('comments')
             .where('book', '==', bookRef)
-            .onSnapshot((s) => {
-                console.log(s)
-            })
+            .onSnapshot(onSnapshot)
     }
 }
 
